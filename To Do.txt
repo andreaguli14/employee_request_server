@@ -1,0 +1,10 @@
+//Add to interface and json
+
+Username (id)
+Select the domain
+Password
+
+//Create User Group select intface
+
+//Create User ++ add user group
+
