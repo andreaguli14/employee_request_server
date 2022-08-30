@@ -172,27 +172,27 @@ export default {
             axios
             .get("https://localhost:5555/script/" + this.userToCopy )
             .then(response => (this.output = response.data))
-            .then(console.log(this.output))
-            setTimeout(this.ricarica, 1500);
+             .then(console.log(this.output))
+             setTimeout(this.fetchoutput, 3000)
        
 
             
         },
         fetchoutput() {
-            axios
-                .get("https://localhost:5555/script/" + this.userToCopy)
-                .then(response => (this.output = response.data))
-                .then(console.log(this.output))
-                .then(this.output = this.output.replace(/[\n]/gm, ''))
-                .then(this.groupOfUser = this.output.split('\r'))
-            },
-        
- },
-      mounted() {
-          
-              
             
-  }
+                axios
+                    .get("https://localhost:5555/script/" + this.userToCopy)
+                    .then(response => (this.output = response.data))
+                    .then(console.log(this.output))
+                    .then(this.output = this.output.replace(/[\r]/gm, ''))
+                    .then(this.groupOfUser = this.output.split('\n'))
+                    .then(this.groupOfUser.pop())
+
+            
+        }
+        
+ }
+           
 }
 
 </script>

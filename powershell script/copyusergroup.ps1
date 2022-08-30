@@ -1,2 +1,2 @@
-$mcopy = $args[0]
-Get-ADGroup -Server $mcopy -Filter "GroupScope -eq 'DomainLocal'"| ForEach-Object {$_.Name}
+$user = get-aduser $args[0] -Properties memberof
+$user.MemberOf | % { ($_ -split ",*..=")[1]}
