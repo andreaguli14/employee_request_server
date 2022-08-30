@@ -1,0 +1,69 @@
+{
+  "EmployeeRequests": [
+    {
+      "name": "Andrea",
+      "surname": "Gulisano",
+      "jobTitle": "koala",
+      "department": "koala",
+      "email": "andrea.gulisano1@live.it",
+      "reportsTo": "koala",
+      "additionalNotes": "fasfaf",
+      "laptopRequired": true,
+      "desktopRequired": false,
+      "phoneRequired": false,
+      "isComplete": true,
+      "startDate": "02/08/2022",
+      "endDate": "08/08/2022",
+      "id": 1
+    },
+    {
+      "name": "kaola",
+      "surname": "koala",
+      "jobTitle": "koala",
+      "department": "koala",
+      "email": "andrea.gulisano1@live.it",
+      "reportsTo": "koala",
+      "additionalNotes": "staff",
+      "laptopRequired": false,
+      "desktopRequired": true,
+      "phoneRequired": false,
+      "isComplete": false,
+      "startDate": "09/08/2022",
+      "endDate": "01/08/2022",
+      "id": 2
+    },
+    {
+      "name": "Ernesto",
+      "surname": "D'amico",
+      "jobTitle": "Cartier",
+      "department": "Assembly",
+      "email": "andrea.gulisano1@live.it",
+      "reportsTo": "guli",
+      "additionalNotes": "bravo cartolario",
+      "laptopRequired": true,
+      "desktopRequired": false,
+      "phoneRequired": false,
+      "isComplete": false,
+      "startDate": "04/08/2022",
+      "endDate": "18/11/2022",
+      "id": 3
+    },
+    {
+      "name": "sucasimula",
+      "surname": "Gulisano",
+      "jobTitle": "akfsaf",
+      "department": "lkahkl",
+      "email": "andrea.gulisano14@gmail.com",
+      "reportsTo": "safaf",
+      "additionalNotes": "safasfa",
+      "laptopRequired": true,
+      "desktopRequired": false,
+      "phoneRequired": false,
+      "isComplete": false,
+      "startDate": "30/08/2022",
+      "endDate": "30/08/2022",
+      "selectedGroup": [],
+      "id": "sucasimula"
+    }
+  ]
+}
