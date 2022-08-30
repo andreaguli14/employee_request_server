@@ -21,7 +21,7 @@ public class PowerShellScriptController : ControllerBase
     public string Get(string id)
         {
         //string z="Get-Aduser -identity internpn";
-        string command = "/c C:\\Users\\internpn\\Desktop\\PowershellScripts-master\\copyusergroup.ps1 " + id;
+        string command = "/c C:\\Users\\internpn\\Desktop\\employee_request_server-main\\powershell_script\\getusergroup.ps1 " + id;
         System.Diagnostics.Process si = new System.Diagnostics.Process();
         si.StartInfo.WorkingDirectory = "c:\\";
         si.StartInfo.UseShellExecute = false;
