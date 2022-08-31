@@ -179,7 +179,7 @@ export default {
                     id:this.username
                 
                     });
-                  
+                  axios.get("https://localhost:5555/createuser/" + this.username)
                   this.$router.go(this.$router.currentRoute) 
                 } 
             catch (e) {
