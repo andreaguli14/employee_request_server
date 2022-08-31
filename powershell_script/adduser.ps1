@@ -1,35 +1,32 @@
-$username = (Read-Host "Input Username")
-$seldomain = (Read-Host "Select the domain: `n 1)inspectra.local `n 2)inspectra.eu `n 3)prettyneat.io `n")
-$name = (Read-Host "Input User Name")
-$surname = (Read-Host "Input User Surname")
-$usernamecomplete=$username+"@"+$domain
-switch ($seldomain)
-{
-    1 { $domain = 'inspectra.local'}
-    2 { $domain = 'inspectra.eu'}
-    3 { $domain = 'prettyneat.io'}
-}
+$url = "http://localhost:3000/EmployeeRequests/" + $args[0]
+$data = Invoke-RestMethod -Uri $url 
+$username = $data.username
+$name = $data.name
+$surname = $data.surname
+$email = $data.email
+$jobtitle = $data.jobTitle
+$password = $data.tempPassword
+$domain = $data.domain
+$usernamecomplete = $username + $domain
+
 
 New-ADUser `
-    -UserPrincipalName $username@$domain `
+    -UserPrincipalName $username+$domain `
     -SamAccountName $username `
-    -Name ($name+" "+$surname) `
+    -Name ($name + " " + $surname) `
     -GivenName $name `
     -Surname $surname `
-    -EmailAddress (Read-Host "Input User Email") `
-    -HomePhone (Read-Host "Input User Phone number") `
-    -Title (Read-Host "Input User Job Title") `
-    -AccountPassword (Read-Host -AsSecureString "Input User Password") `
+    -EmailAddress $email  `
+    # -HomePhone (Read-Host "Input User Phone number") `
+    -Title $jobtitle `
+    -AccountPassword $password `
     -ChangePasswordAtLogon $True `
     -Enabled $True
 
-$mcopy=(Read-Host "Input User to copy ")
 
+foreach ($group in  $data.selectedGroup ) {
 
-foreach ($objectGUID in Get-ADPrincipalGroupMembership -Identity $mcopy | Select-Object -Property objectGUID )
-{
-
-    Add-ADPrincipalGroupMembership -Identity $usernamecomplete -MemberOf $objectGUID 
+    Add-ADPrincipalGroupMembership -Identity $usernamecomplete -MemberOf $group
 
 }
   
@@ -55,7 +52,7 @@ foreach ($objectGUID in Get-ADPrincipalGroupMembership -Identity $mcopy | Select
   
   
   
-    <#  Connect-MsolService
+<#  Connect-MsolService
     $exchangechose = Read-Host "Do you want add Exchange License write Y to confirm"
     if($exchangechose -eq "y" -or $exchangechose -eq "Y"  ){
             
