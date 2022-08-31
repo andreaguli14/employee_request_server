@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "unoverlay-vue": "^0.2.2"
+  },
+  "devDependencies": {
+    "sass": "^1.54.7",
+    "sass-loader": "^13.0.2",
+    "webpack": "^5.74.0"
+  }
+}

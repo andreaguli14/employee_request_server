@@ -1,7 +1,7 @@
 <template>
     <section class="ftco-section">
 		<div class="container">
-			<button class="button-66 " @click="$router.push('/')" role="button">Employee Request Index</button><br><br><br>
+			<button class="button-66" @click="$router.push('/')" role="button">Employee Request Index</button><br><br><br>
 			<div class="row ">
 				<div class="col-md-12" >
                     <form @submit.prevent="submituser()">
@@ -14,6 +14,20 @@
                                 <div class="col-md">
                                     <label>Surname</label>
                                     <input name="lastname" id="surname" type="text" required v-model="surname">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md">
+                                    <label>Username</label>
+                                    <input  name="firstname" id="name" type="text" required v-model="username">
+                                </div>
+                                <div class="col-md">
+                                    <label>Domain:</label>
+                                    <select name="domain" id="domain" v-model="domain">
+                                        <option value="@inspectra.local" selected>inspectra.local</option>
+                                        <option value="@inspectra.eu" >inspectra.eu</option>
+                                        <option value="@prettyneat.io">prettyneat.io</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -40,6 +54,8 @@
                             <input type="reportTo" required v-model="reportsTo">
                             <label>Email:</label>
                             <input type="email" required v-model="email">
+                            <label>Password:</label>
+                            <input type="password" required v-model="tempPassword">
                             <label>Additional Notes:</label>
                             <textarea name="additionalNotes" class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="additionalNotes"></textarea>
                             <div>
@@ -67,14 +83,18 @@
                                 </div>
                             </div>
                             </div>
-
-                            <button @click="saveOutput()">salva output</button>
+                            <label>User to copy</label>
                             <input type="text" required v-model="userToCopy">
-                            <div v-for="group in groupOfUser" :key="group.id"> 
-                            <input type="checkbox" :value="group" v-model="groupSelected">
-                            <label>{{group}}</label>
-                            </div>
-                            
+                            <button  @click="saveOutput(), isOpen = true">Select Permissions</button>
+                             <Modal :open="isOpen" @close="isOpen = !isOpen">
+                                <div v-for="group in groupOfUser" :key="group.id"> 
+                                    <input type="checkbox" :value="group" v-model="groupSelected">
+                                    <label>{{group}}</label>
+                                </div>
+                            </Modal>
+
+
+
                             <div class="submit">
                                 <button>Add user</button>
                                 <p>{{groupSelected}}</p>
@@ -83,23 +103,6 @@
                 </div>
 			</div>
 		</div>
-
-        <!-- <div>
-            <h1>Test</h1>
-            <p>name:{{name}}</p>
-            <p>surname:{{surname}}</p>
-            <p>jobTitle:{{jobTitle}}</p>
-            <p>department:{{department}}</p>
-            <p>email:{{email}}</p>
-            <p>startDate:{{convertDate(startDate)}}</p>
-            <p>endDate:{{convertDate(endDate)}}</p>
-            <p>reportTo:{{reportsTo}}</p>
-            <p>additionalNotes:{{additionalNotes}}</p>
-            <p>laptopRequired:{{laptopRequired}}</p>
-            <p>desktopRequired:{{desktopRequired}}</p>
-            <p>phoneRequired:{{phoneRequired}}</p>
-            <p>isComplete:{{isComplete}}</p>
-        </div> -->
 	</section>
 </template>
 
@@ -107,16 +110,25 @@
 import Datepicker from 'vuejs3-datepicker';
 import moment from 'moment'
 import axios from "axios";
+import Modal from "./Modal.vue";
+import { ref } from "vue";
 const localURL = "http://localhost:3000/EmployeeRequests/"
 export default {
+    setup() {
+        const isOpen = ref(false);
+
+        return { isOpen };
+     },
     name: "CreateEmployeeRequest",
     components: {
-        Datepicker
+        Datepicker,
+        Modal
     },
         data() {
         return {
             name:'',
             surname:'',
+            username:'',
             jobTitle:'',
             department:'',
             email: '',
@@ -128,8 +140,8 @@ export default {
             phoneRequired:false,
             additionalNotes:'',
             isComplete:false,
-
-            
+            domain:'@inspectra.local',
+            tempPassword:'',
 		    userToCopy:"",
             groupOfUser:[],
 		    groupSelected:[],
@@ -147,9 +159,11 @@ export default {
             
                     name:this.name,
                     surname:this.surname,
+                    usernam:this.username,
                     jobTitle:this.jobTitle,
                     department:this.department,
                     email: this.email,
+                    tempPassword:this.tempPassword,
                     reportsTo:this.reportsTo,
                     additionalNotes:this.additionalNotes,
                     laptopRequired:this.laptopRequired,
@@ -158,7 +172,9 @@ export default {
                     isComplete:this.isComplete,
                     startDate: this.convertDate(this.startDate),
                     endDate: this.convertDate(this.endDate),
-                    selectedGroup:this.groupSelected
+                    selectedGroup:this.groupSelected,
+                    domain:this.domain,
+                    id:this.username
                 
                     });
                   
