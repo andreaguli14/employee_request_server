@@ -2,6 +2,8 @@
 	<div class="vue-modal" @click.self="$emit('close')" v-show="open">
 			<div class="vue-modal-content">
 			  <slot />
+			</div>
+      <div>
 			  <button type="button" class="selectbutton" @click="$emit('close')">Select Permissions</button>
 			</div>
 	  </div>
@@ -33,7 +35,6 @@
 background: #0b6dff;
 border: 0;
 padding: 10px 20px;
-margin-top: 20px;
 color: white;
 border-radius: 20px;
 margin:0 auto;
@@ -41,13 +42,14 @@ display:block;
 }
 
 .vue-modal-content {
-  width: 75%;
+  width: 50%;
   position: relative;
-  margin:100px auto;
+  margin: 20px auto;
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  background-clip: padding-box;
-  border-radius: 0.3rem;
+  border-radius: 15px;
   padding: 1rem;
+  overflow-y: auto;
+  max-height: 38rem;
 }
+
   </style>

@@ -11,18 +11,31 @@ using System.Diagnostics.Metrics;
 namespace backend.Controllers;
 
 [ApiController]
-[Route("/adduser")]
+[Route("/user")]
 
-public class PowerShellScriptController : ControllerBase
+public class ListOfUser : ControllerBase
 
 {
     //get member of user
     [HttpGet("{id}")]
     public string Get(string id)
     {
-       
-        string url = "http://localhost:3000/Emplo"
-        return "ciao";
+        //string z="Get-Aduser -identity internpn";
+        string command = "/c C:\\Users\\internpn\\Desktop\\employee_request_server-main\\powershell_script\\getuser.ps1 ";
+        System.Diagnostics.Process si = new System.Diagnostics.Process();
+        si.StartInfo.WorkingDirectory = "c:\\";
+        si.StartInfo.UseShellExecute = false;
+        si.StartInfo.FileName = "powershell.exe";
+        si.StartInfo.Arguments = command;
+        si.StartInfo.CreateNoWindow = true;
+        si.StartInfo.RedirectStandardInput = true;
+        si.StartInfo.RedirectStandardOutput = true;
+        si.StartInfo.RedirectStandardError = true;
+        si.Start();
+        string output = si.StandardOutput.ReadToEnd();
+        si.Close();
+
+        return output;
 
 
     }

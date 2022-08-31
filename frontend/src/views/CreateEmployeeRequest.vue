@@ -85,14 +85,15 @@
                             </div>
                             <div class="row my-sm-3">
                                 <label>User to copy:&nbsp;</label>
-                                <input type="text" required v-model="userToCopy">&nbsp;
-                                <button  @click="saveOutput(), isOpen = true">Check Permissions</button>
+                                <select class="" name="user" id="user" v-model="userToCopy"> 
+                                         <option v-for="userini in userList" :value="userini" >{{userini}}</option>
+                                </select>&nbsp;
+                                <button type="button" @click="saveOutput(), isOpen = true">Check Permissions</button>
                                 <Modal :open="isOpen" @close="isOpen = !isOpen">
                                     <div v-for="group in groupOfUser" :key="group.id"> 
                                         <input type="checkbox" :value="group" v-model="groupSelected">
                                         <label>{{group}}</label>
                                     </div>
-                                    <p>{{groupSelected}}</p>
                                 </Modal>
                             </div>
                             <div class="submit">
@@ -144,7 +145,9 @@ export default {
 		    userToCopy:"",
             groupOfUser:[],
 		    groupSelected:[],
-            output:""
+            output:"",
+            user:"",
+            userList:[]
         
         }
     },
@@ -183,29 +186,23 @@ export default {
                 console.error(e);
              }
          },
-         saveOutput() {
-            axios
-            .get("https://localhost:5555/script/" + this.userToCopy )
-            .then(response => (this.output = response.data))
-             .then(console.log(this.output))
-             setTimeout(this.fetchoutput, 3000)
-       
-
-            
-        },
-        fetchoutput() {
-            
-                axios
-                    .get("https://localhost:5555/script/" + this.userToCopy)
-                    .then(response => (this.output = response.data))
-                    .then(console.log(this.output))
-                    .then(this.output = this.output.replace(/[\r]/gm, ''))
-                    .then(this.groupOfUser = this.output.split('\n'))
-                    .then(this.groupOfUser.pop())
-
-            
+        async saveOutput() {
+            let response = await axios.get("https://localhost:5555/script/" + this.userToCopy)
+            this.output = response.data
+            console.log(this.output)
+            this.output = this.output.replace(/[\r]/gm, '')
+            this.groupOfUser = this.output.split('\n')
+            this.groupOfUser.pop()
         }
-        
+         
+ },
+async mounted(){
+    let response = await axios.get("https://localhost:5555/user/getuser")
+    this.user = response.data
+    console.log(this.user)
+    this.user = this.user.replace(/[\r]/gm, '')
+    this.userList = this.user.split('\n')
+    this.userList.pop()
  }
            
 }

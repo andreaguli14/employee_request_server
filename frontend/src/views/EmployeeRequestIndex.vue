@@ -66,11 +66,6 @@ export default {
 </script>
 
 <style>
-.formtitle{
-	margin:auto;
-	margin-bottom: 20px;
-	}
-
 @import "/src/css/style.css";
 </style>
 
