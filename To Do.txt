@@ -1,5 +1,3 @@
-
-//Create User Group select intface
-
+//fetch data from json to asp
 //Create User ++ add user group
 

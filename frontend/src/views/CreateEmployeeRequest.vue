@@ -4,26 +4,26 @@
 			<button class="button-66" @click="$router.push('/')" role="button">Employee Request Index</button><br><br><br>
 			<div class="row ">
 				<div class="col-md-12" >
-                    <form @submit.prevent="submituser()">
+                    <form class="createuserform"  @submit.prevent="submituser()">
                         <h1 class="formtitle">Create Employee Request</h1>
                             <div class="row">
                                 <div class="col-md">
-                                    <label>Name</label>
-                                    <input  name="firstname" id="name" type="text" required v-model="name">
+                                    <label class="labelform">Name</label>
+                                    <input  class="inputform" name="firstname" id="name" type="text" required v-model="name">
                                 </div>
                                 <div class="col-md">
-                                    <label>Surname</label>
-                                    <input name="lastname" id="surname" type="text" required v-model="surname">
+                                    <label class="labelform">Surname</label>
+                                    <input class="inputform" name="lastname" id="surname" type="text" required v-model="surname">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md">
-                                    <label>Username</label>
-                                    <input  name="firstname" id="name" type="text" required v-model="username">
+                                    <label class="labelform">Username</label>
+                                    <input class="inputform" name="firstname" id="name" type="text" required v-model="username">
                                 </div>
                                 <div class="col-md">
-                                    <label>Domain:</label>
-                                    <select name="domain" id="domain" v-model="domain">
+                                    <label class="labelform">Domain:</label>
+                                    <select class="selectform" name="domain" id="domain" v-model="domain">
                                         <option value="@inspectra.local" selected>inspectra.local</option>
                                         <option value="@inspectra.eu" >inspectra.eu</option>
                                         <option value="@prettyneat.io">prettyneat.io</option>
@@ -32,49 +32,49 @@
                             </div>
                             <div class="row">
                                 <div class="col-md">
-                                    <label>Job Title</label>
-                                    <input  id="jobTitle" type="text" required v-model="jobTitle">
+                                    <label class="labelform">Job Title</label>
+                                    <input class="inputform" id="jobTitle" type="text" required v-model="jobTitle">
                                 </div>
                                 <div class="col-md">
-                                    <label>Department</label>
-                                    <input id="department" type="text" required v-model="department">
+                                    <label class="labelform">Department</label>
+                                    <input class="inputform" id="department" type="text" required v-model="department">
                                 </div>
                             </div>
                               <div class="row">
                                     <div class="col-md">
-                                        <label>Start Date</label><br>
+                                        <label class="labelform">Start Date</label><br>
                                             <datepicker id="startDate" required  v-model="startDate"></datepicker>
                                     </div>
                                     <div class="col-md">
-                                        <label>End Date</label><br>
+                                        <label class="labelform">End Date</label><br>
                                         <datepicker id="startDate" required v-model="endDate"></datepicker>
                                     </div>
                                 </div>
-                             <label>Report to:</label>
-                            <input type="reportTo" required v-model="reportsTo">
-                            <label>Email:</label>
-                            <input type="email" required v-model="email">
-                            <label>Password:</label>
-                            <input type="password" required v-model="tempPassword">
-                            <label>Additional Notes:</label>
+                             <label class="labelform">Report to:</label>
+                            <input class="inputform" type="reportTo" required v-model="reportsTo">
+                            <label class="labelform">Email:</label>
+                            <input class="inputform" type="email" required v-model="email">
+                            <label  class="labelform">Password:</label>
+                            <input class="inputform" type="password" required v-model="tempPassword">
+                            <label class="labelform">Additional Notes:</label>
                             <textarea name="additionalNotes" class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="additionalNotes"></textarea>
                             <div>
-                                <div class="row ">
-                                <div class="col-md">
-                                    <label class="form-switch">
+                                <div class="row my-sm-2">
+                                <div class="col-md labelform">
+                                    <label  class="form-switch ">
                                     <span class="required">Laptop Required:</span>>
                                     <input class="f" type="checkbox" v-model="laptopRequired">
                                     <i></i>
                                 </label>
                                 </div>
-                                <div class="col-md">
-                                    <label class="form-switch">
+                                <div class="col-md labelform">
+                                    <label class="form-switch ">
                                     <span class="required">Desktop Required:</span>>
                                     <input class="f" type="checkbox" v-model="desktopRequired">
                                    <i></i>
                                 </label>
                                 </div>
-                                <div class="col-md">
+                                <div class="col-md labelform">
                                       <label class="form-switch">
                                     <span class="required">Phone Required:</span>>
                                     <input class="f" type="checkbox" v-model="phoneRequired">
@@ -83,21 +83,20 @@
                                 </div>
                             </div>
                             </div>
-                            <label>User to copy</label>
-                            <input type="text" required v-model="userToCopy">
-                            <button  @click="saveOutput(), isOpen = true">Select Permissions</button>
-                             <Modal :open="isOpen" @close="isOpen = !isOpen">
-                                <div v-for="group in groupOfUser" :key="group.id"> 
-                                    <input type="checkbox" :value="group" v-model="groupSelected">
-                                    <label>{{group}}</label>
-                                </div>
-                            </Modal>
-
-
-
+                            <div class="row my-sm-3">
+                                <label>User to copy:&nbsp;</label>
+                                <input type="text" required v-model="userToCopy">&nbsp;
+                                <button  @click="saveOutput(), isOpen = true">Check Permissions</button>
+                                <Modal :open="isOpen" @close="isOpen = !isOpen">
+                                    <div v-for="group in groupOfUser" :key="group.id"> 
+                                        <input type="checkbox" :value="group" v-model="groupSelected">
+                                        <label>{{group}}</label>
+                                    </div>
+                                    <p>{{groupSelected}}</p>
+                                </Modal>
+                            </div>
                             <div class="submit">
                                 <button>Add user</button>
-                                <p>{{groupSelected}}</p>
                             </div>
                      </form>
                 </div>
@@ -213,7 +212,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style >
 
 .required{
     font-size: 13px;
@@ -226,7 +225,7 @@ export default {
     margin-bottom: 20px;
 }
 
-form{
+ .createuserform{
     max-width: 50rem;
     margin:30px auto;
     background:white;
@@ -235,7 +234,7 @@ form{
     border-radius:10px;
  }
 
-label{
+.labelform{
     color:#aaa;
     display: inline-block;
     margin:25px 0 15px;
@@ -248,7 +247,7 @@ label{
     display: inline-block
 }
 
-input, select{
+ .inputform, .selectform{
   display:block;
   padding:10px 6px;
   width:100%;
@@ -276,6 +275,7 @@ text-align: center;
 .form-switch {
   display:inline-block;
   cursor: pointer;
+  font-size: 8px;
   -webkit-tap-highlight-color: transparent;
 }
 .form-switch i {

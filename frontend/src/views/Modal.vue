@@ -1,13 +1,9 @@
 <template>
-	<div class="vue-modal" v-show="open">
-		<transition name="slide">
-		  <div class="veu-modal-inner">
+	<div class="vue-modal" @click.self="$emit('close')" v-show="open">
 			<div class="vue-modal-content">
 			  <slot />
-			  <button type="button" @click="$emit('close')">Close</button>
+			  <button type="button" class="selectbutton" @click="$emit('close')">Select Permissions</button>
 			</div>
-		  </div>
-		</transition>
 	  </div>
   </template>
   
@@ -22,14 +18,6 @@
   };
   </script>
   <style>
-	*,
-::before,
-::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .vue-modal {
   position: fixed;
   top: 0;
@@ -41,10 +29,15 @@
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
-
-.vue-modal-inner {
-  max-width: 100px;
-  margin: 2rem auto;
+.selectbutton {
+background: #0b6dff;
+border: 0;
+padding: 10px 20px;
+margin-top: 20px;
+color: white;
+border-radius: 20px;
+margin:0 auto;
+display:block;
 }
 
 .vue-modal-content {
