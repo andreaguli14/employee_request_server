@@ -88,7 +88,7 @@
                                 <select class="" name="user" id="user" v-model="userToCopy"> 
                                          <option v-for="userini in userList"  :key="userini" :value="userini" >{{userini}}</option>
                                 </select>&nbsp;
-                                <button type="button" @click="saveOutput(),groupOfUser=[], isOpen = true">Check Permissions</button>
+                                <button type="button" @click="saveOutput(),groupOfUser=[],loadGroup=true, isOpen = true">Check Permissions</button>
                                 <Modal :open="isOpen" @close="isOpen = !isOpen">
                                     <div class="text-center" v-if="loadGroup">
                                         <div class="spinner-border text-primary marginspinner" role="status">
