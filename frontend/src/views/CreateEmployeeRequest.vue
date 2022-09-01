@@ -185,7 +185,7 @@ export default {
                     id:this.username
                 
                     });
-                  axios.get("https://localhost:5555/createuser/" + this.username)
+                  axios.get("https://192.168.2.3:5555/createuser/" + this.username)
                   this.$router.go(this.$router.currentRoute) 
                 } 
             catch (e) {
@@ -193,7 +193,7 @@ export default {
              }
          },
         async saveOutput() {
-            let response = await axios.get("https://localhost:5555/script/" + this.userToCopy)
+            let response = await axios.get("https://192.168.2.3:5555/script/" + this.userToCopy)
             this.loadGroup = false
             this.output = response.data
             console.log(this.output)
@@ -204,7 +204,7 @@ export default {
          
  },
 async mounted(){
-    let response = await axios.get("https://localhost:5555/user/getuser")
+    let response = await axios.get("https://192.168.2.3:5555/user/getuser")
     this.user = response.data
     console.log(this.user)
     this.user = this.user.replace(/[\r]/gm, '')
