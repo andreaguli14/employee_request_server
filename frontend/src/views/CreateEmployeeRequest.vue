@@ -86,10 +86,15 @@
                             <div class="row my-sm-3">
                                 <label>User to copy:&nbsp;</label>
                                 <select class="" name="user" id="user" v-model="userToCopy"> 
-                                         <option v-for="userini in userList" :value="userini" >{{userini}}</option>
+                                         <option v-for="userini in userList"  :key="userini" :value="userini" >{{userini}}</option>
                                 </select>&nbsp;
-                                <button type="button" @click="saveOutput(), isOpen = true">Check Permissions</button>
+                                <button type="button" @click="saveOutput(),groupOfUser=[], isOpen = true">Check Permissions</button>
                                 <Modal :open="isOpen" @close="isOpen = !isOpen">
+                                    <div class="text-center" v-if="loadGroup">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
                                     <div v-for="group in groupOfUser" :key="group.id"> 
                                         <input type="checkbox" :value="group" v-model="groupSelected">
                                         <label>{{group}}</label>
@@ -143,11 +148,12 @@ export default {
             domain:'@inspectra.local',
             tempPassword:'',
 		    userToCopy:"",
-            groupOfUser:[],
+            groupOfUser:["koala","suca","melo"],
 		    groupSelected:[],
             output:"",
             user:"",
-            userList:[]
+            userList:[],
+            loadGroup:true
         
         }
     },
@@ -161,7 +167,7 @@ export default {
             
                     name:this.name,
                     surname:this.surname,
-                    usernam:this.username,
+                    username:this.username,
                     jobTitle:this.jobTitle,
                     department:this.department,
                     email: this.email,
@@ -188,6 +194,7 @@ export default {
          },
         async saveOutput() {
             let response = await axios.get("https://localhost:5555/script/" + this.userToCopy)
+            this.loadGroup = false
             this.output = response.data
             console.log(this.output)
             this.output = this.output.replace(/[\r]/gm, '')
