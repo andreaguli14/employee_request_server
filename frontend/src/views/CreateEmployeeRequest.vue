@@ -91,7 +91,7 @@
                                 <button type="button" @click="saveOutput(),groupOfUser=[], isOpen = true">Check Permissions</button>
                                 <Modal :open="isOpen" @close="isOpen = !isOpen">
                                     <div class="text-center" v-if="loadGroup">
-                                        <div class="spinner-border text-primary" role="status">
+                                        <div class="spinner-border text-primary marginspinner" role="status">
                                             <span class="sr-only">Loading...</span>
                                         </div>
                                     </div>
@@ -217,7 +217,9 @@ async mounted(){
 </script>
 
 <style >
-
+.marginspinner{
+    margin: 25% auto;
+}
 .required{
     font-size: 13px;
     margin-top: 10px;
