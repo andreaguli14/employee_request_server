@@ -17,7 +17,7 @@ public class GetUser : ControllerBase
     public string Get(string id)
     {
         //string z="Get-Aduser -identity internpn";
-        string command = "/c C:\\Users\\internpn\\Desktop\\employee_request_server-main\\powershell_script\\getuser.ps";
+        string command = "/c C:\\Users\\internpn\\Desktop\\employee_request_server-main\\powershell_script\\getuser.ps1";
         System.Diagnostics.Process si = new System.Diagnostics.Process();
         si.StartInfo.WorkingDirectory = "c:\\";
         si.StartInfo.UseShellExecute = false;
